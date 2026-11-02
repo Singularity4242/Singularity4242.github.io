@@ -1,0 +1,135 @@
+{
+  "name": "郭蕙宁",
+  "englishName": "Nicole Kwok",
+  "github": "https://github.com/Singularity4242",
+  "email": "nicole2290@163.com",
+  "role": "后端开发 · AI 应用开发",
+  "intro": "我注重探索以业务为导向的技术方案，并关注异常处理与兜底机制，以保障系统的稳定性与可用性。",
+  "education": [
+    {
+      "school": "香港理工大学",
+      "degree": "人工智能与大数据计算 · 硕士",
+      "date": "2025.08 — 2026.11",
+      "note": "从计算机基础出发，拓展 AI 应用与数据计算的视野。"
+    },
+    {
+      "school": "华南农业大学",
+      "degree": "计算机科学与技术 · 本科",
+      "date": "2020.09 — 2025.06",
+      "note": "建立软件开发基础，以 Java 为主要开发语言。"
+    }
+  ],
+  "experience": {
+    "company": "美的集团 · 美云智数",
+    "role": "后端开发实习工程师",
+    "department": "数字供应链部门",
+    "date": "2024.07 — 2024.12",
+    "intro": "参与供应商关系管理（SRM）系统研发，将付款计划、物料与审批规则转化为可交付的后端功能。",
+    "points": [
+      {
+        "title": "把审批结果落到业务状态",
+        "body": "处理付款计划变更的通过、驳回与撤回回调，在本地事务中更新付款计划和变更单状态。"
+      },
+      {
+        "title": "让批量导入可校验、可定位",
+        "body": "基于 EasyExcel 解析建议价数据，批量预取基础资料并建立内存索引，执行重复与有效性校验，生成逐行错误反馈。"
+      },
+      {
+        "title": "参与业务需求的完整交付",
+        "body": "围绕付款计划、物料分类和批次号等模块，参与需求拆解、数据与接口设计、联调及问题定位。"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "paperpartner",
+      "number": "01",
+      "name": "PaperPartner",
+      "subtitle": "科研论文多轮检索问答",
+      "category": "RESEARCH × AI",
+      "date": "2026.05 — 2026.09",
+      "theme": "paper",
+      "description": "面向论文资料管理与跨文档问答，连接文档入库、检索、带引用回答与多轮会话。Java 管理业务状态，Python 承接解析与模型执行。",
+      "tags": [
+        "Spring Boot",
+        "PostgreSQL",
+        "Python",
+        "LanceDB",
+        "Agent"
+      ],
+      "focus": "异步任务恢复 / 会话一致性 / 引用与上下文",
+      "url": "https://github.com/Singularity4242/paper-replication-agentic-rag/tree/main/app/backend-java",
+      "linkLabel": "GitHub 链接",
+      "origin": "基于开源 haiku.rag 扩展，重点开发 Java 业务服务及任务、会话链路。",
+      "notes": [
+        {
+          "title": "任务中断后，如何继续？",
+          "body": "将文档处理建模为持久化任务，使用 PostgreSQL FOR UPDATE SKIP LOCKED 领取任务。租约限定有效执行时间，execution_token 用来拒绝过期执行写回，有限重试处理暂时性故障。"
+        },
+        {
+          "title": "如何管理业务与模型的边界？",
+          "body": "Spring Boot 负责资料库、文档任务及多轮会话；Python 负责 Docling 解析、向量检索与 Agent 执行。长耗时外部调用放在数据库事务之外，状态变更使用短事务提交。"
+        },
+        {
+          "title": "如何让多轮问答可恢复？",
+          "body": "通过 requestId 识别重复请求，结合会话锁与版本号控制并行执行和过期结果；先提交最终回答与 Checkpoint，再发送 SSE 完成事件。"
+        }
+      ]
+    },
+    {
+      "id": "lumina",
+      "number": "02",
+      "name": "Lumina Walk",
+      "subtitle": "摄影地点发现与 AI 助手",
+      "category": "PHOTOGRAPHY × ENGINEERING",
+      "date": "2025.05 — 2025.08",
+      "theme": "lumina",
+      "description": "为摄影爱好者组织地点、笔记与优惠券服务。把异步交易链路与摄影 AI 助手放进同一个应用，让技术围绕具体的用户任务展开。",
+      "tags": [
+        "Java",
+        "Redis · Lua",
+        "RocketMQ",
+        "Spring AI",
+        "Milvus"
+      ],
+      "focus": "异步订单 / 滑动窗口限流 / 工具调用",
+      "url": "https://github.com/Singularity4242/lumina-walk",
+      "linkLabel": "GitHub 链接",
+      "origin": "基于「黑马点评」业务代码二次开发，重点扩展交易链路与 AI 应用。",
+      "notes": [
+        {
+          "title": "把抢购资格与订单落库拆开",
+          "body": "Redis Lua 原子完成库存预扣和重复购买校验，RocketMQ 承接异步订单创建。围绕消息发送失败、重复消费与超时未支付，处理补偿、幂等与关单。"
+        },
+        {
+          "title": "按接口成本约束请求密度",
+          "body": "使用 Redis ZSet 与 Lua 统计滑动窗口内的请求，结合注解、AOP 与 SpEL 配置限流键和阈值，为交易入口与模型请求提供不同额度。"
+        },
+        {
+          "title": "模型选工具，程序守边界",
+          "body": "通过 Spring AI 实现有界工具调用循环，结合 Milvus 检索平台规则、地点与摄影笔记；使用执行步数和异常退出路径控制任务，通过 SSE 呈现处理进度。"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "title": "业务与服务",
+      "english": "BACKEND SYSTEMS",
+      "description": "从接口与数据模型，到事务、并发和异常路径。",
+      "items": "Java / Spring Boot / MyBatis-Plus / MySQL / PostgreSQL"
+    },
+    {
+      "title": "数据与可靠性",
+      "english": "DATA & RELIABILITY",
+      "description": "理解缓存与消息的价值，也处理跨组件的不确定性。",
+      "items": "Redis / Lua / RocketMQ / 幂等 / 任务恢复"
+    },
+    {
+      "title": "模型应用",
+      "english": "APPLIED AI",
+      "description": "把检索、工具调用和会话状态连接成完整应用。",
+      "items": "RAG / Agent / Spring AI / Python / SSE / Docker"
+    }
+  ]
+}
