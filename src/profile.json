@@ -67,7 +67,6 @@
       "focus": "持久化任务恢复 / 跨存储一致性 / 会话状态 / 上下文压缩",
       "url": "https://github.com/Singularity4242/paper-replication-agentic-rag/tree/main/app/backend-java",
       "linkLabel": "GitHub 链接",
-      "origin": "基于开源 haiku.rag 扩展，重点开发 Java 业务服务及任务、会话链路。",
       "notes": [
         {
           "title": "持久化异步任务与故障恢复",
@@ -113,7 +112,6 @@
       "focus": "秒杀交易与最终一致性 / 双维度限流 / Agent 与 RAG",
       "url": "https://github.com/Singularity4242/lumina-walk",
       "linkLabel": "GitHub 链接",
-      "origin": "基于「黑马点评」业务代码二次开发，重点扩展交易链路与 AI 应用。",
       "notes": [
         {
           "title": "秒杀交易与最终一致性",
